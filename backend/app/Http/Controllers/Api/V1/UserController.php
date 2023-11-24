@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -22,6 +23,13 @@ class UserController extends Controller
         $validated = $request->validated();
         $user = User::create($validated);
 
+        return new UserResource($user);
+    }
+
+    public function update(UserUpdateRequest $request, User $user): UserResource
+    {
+        $validated = $request->validated();
+        $user->update($validated);
         return new UserResource($user);
     }
 }
