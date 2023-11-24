@@ -8,6 +8,7 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -36,5 +37,11 @@ class UserController extends Controller
         $validated = $request->validated();
         $user->update($validated);
         return new UserResource($user);
+    }
+
+    public function destroy(User $user): JsonResponse
+    {
+        $user->delete();
+        return response()->json([ 'message' => 'User deleted']);
     }
 }
