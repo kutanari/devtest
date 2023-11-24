@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(): UserCollection
     {
-        $users = User::all();
+        $users = User::paginate(1);
         return new UserCollection($users);
     }
 
@@ -23,6 +23,11 @@ class UserController extends Controller
         $validated = $request->validated();
         $user = User::create($validated);
 
+        return new UserResource($user);
+    }
+    
+    public function show(User $user): ?UserResource
+    {
         return new UserResource($user);
     }
 
