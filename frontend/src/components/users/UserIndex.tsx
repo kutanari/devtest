@@ -1,34 +1,12 @@
-import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageContainer from "../PageContainer";
+import UserContext from "../../Context/UserContext";
 
-interface User {
-    id: number;
-    name: string;
-    email: string;
-}
 
 const UserIndex: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([]);
-
+    const { users, getUsers } = useContext(UserContext);
     useEffect(() => {
-        const env = import.meta.env;
-        const getUsers = async () => {
-            try {
-                const response: AxiosResponse = await axios.get(
-                    env.VITE_API_BASE_URL +
-                        "/api/" +
-                        env.VITE_API_VERSION +
-                        "/users"
-                );
-                const userData: User[] = response.data.data;
-                setUsers(userData);
-            } catch (error) {
-                console.error("Error fetching user data", error);
-            }
-        };
-
         getUsers();
     }, []);
 
