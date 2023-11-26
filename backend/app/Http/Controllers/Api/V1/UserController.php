@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index(): UserCollection
     {
-        $users = User::paginate(5);
+        $users = User::paginate(5)->where('id', '<>', 1);
         return new UserCollection($users);
     }
 
