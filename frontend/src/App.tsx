@@ -4,6 +4,7 @@ import UserIndex from "./components/users/UserIndex";
 import Layout from "./components/Layout";
 import UserCreate from "./components/users/UserCreate";
 import { UserProvider } from "./Context/UserContext";
+import UserEdit from "./components/users/UserEdit";
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                         <Route index element={<Home />} />
                         <Route path="/users" element={<UserIndex />} />
                         <Route path="/user/create" element={<UserCreate />} />
+                        <Route path="/user/:id/edit/" element={<UserEdit />} />
                     </Route>
                 </Routes>
             </UserProvider>
